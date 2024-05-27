@@ -1,0 +1,10 @@
+.work_field {
+  width: 100%;
+}
+.draggable__div {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #0074D9;
+  cursor: grab;
+}

@@ -1,24 +1,34 @@
 import React, { useState } from "react";
-import classes from "./Panel.module.css"
+import classes from "./Panel.module.css";
 import MyButton from "../MyButton/MyButton";
 
-const Panel = () => {
+const Panel = ({ setDivs, divs }) => {
   
   const [displayPanel, setDisplayPanel] = useState(true);
 
+  const rootClasses = [classes.panel__block];
+  if (!displayPanel) rootClasses.push(classes.hiden__block);
+
   const buttons = [
-    "div", "button", "input",
-    "h1", "h2", "h3",
-    "h4", "h5", "h6", "p"
+    {name: "div", function: setDivs, state: divs},
+    {name: "button", function: null, state: null},
+    {name: "input", function: null, state: null},
+    {name: "h1", function: null, state: null},
+    {name: "h2", function: null, state: null},
+    {name: "h3", function: null, state: null},
+    {name: "h4", function: null, state: null},
+    {name: "h5", function: null, state: null},
+    {name: "h6", function: null, state: null},
+    {name: "p", function: null, state: null}
   ];
 
   return (
-    <div className={classes.panel__block}>
+    <div className={rootClasses.join(" ")}>
       {displayPanel
       ? 
         <div className={classes.panel}>
           {buttons.map(btn =>
-            <MyButton key={btn}>&lt;{btn}&gt;</MyButton>
+            <MyButton key={btn.name} onClick = {() => btn.function(btn.state + 1)}>&lt;{btn.name}&gt;</MyButton>
           )}
         </div>
       : 
