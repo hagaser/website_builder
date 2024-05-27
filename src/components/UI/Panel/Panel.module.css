@@ -1,0 +1,22 @@
+.panel {
+  border-right: 2px solid #999999;
+  height: 100vh;
+  width: 96%;
+}
+.panel__block {
+  position: fixed;
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+.hide__panel {
+  background-color: white;
+  border: 1px solid;
+  border-left: none;
+  padding: 20px 3px 20px 3px;
+}
+.hiden__panel {
+  border-right: 2px solid #999999;
+  height: 100vh;
+  width: 0;
+}
