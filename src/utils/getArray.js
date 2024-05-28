@@ -1,9 +1,9 @@
 export const getArray = (count) => {
 
-  const Arr = []
+  let Arr = []
 
-  for(let i = 1; i < count + 1; i++) {
-    Arr.push(i)
+  for(let i = 0; i < count; i++) {
+    Arr.push({index: i, style: {}})
   }
 
   return Arr

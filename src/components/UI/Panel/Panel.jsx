@@ -1,35 +1,37 @@
 import React, { useState } from "react";
 import classes from "./Panel.module.css";
-import MyButton from "../MyButton/MyButton";
+import ButtonPanel from "../ButtonPanel/ButtonPanel";
+import ClassPanel from "../ClassPanel/ClassPanel";
 
-const Panel = ({ setDivs, divs }) => {
+const Panel = ({ setDivs, divs, displayMethod, setDisplayMethod, setClassPack }) => {
   
   const [displayPanel, setDisplayPanel] = useState(true);
 
   const rootClasses = [classes.panel__block];
   if (!displayPanel) rootClasses.push(classes.hiden__block);
 
-  const buttons = [
-    {name: "div", function: setDivs, state: divs},
-    {name: "button", function: null, state: null},
-    {name: "input", function: null, state: null},
-    {name: "h1", function: null, state: null},
-    {name: "h2", function: null, state: null},
-    {name: "h3", function: null, state: null},
-    {name: "h4", function: null, state: null},
-    {name: "h5", function: null, state: null},
-    {name: "h6", function: null, state: null},
-    {name: "p", function: null, state: null}
-  ];
-
   return (
     <div className={rootClasses.join(" ")}>
+
       {displayPanel
       ? 
         <div className={classes.panel}>
-          {buttons.map(btn =>
-            <MyButton key={btn.name} onClick = {() => btn.function(btn.state + 1)}>&lt;{btn.name}&gt;</MyButton>
-          )}
+
+          {displayMethod === "buttons" &&
+            <ButtonPanel
+              setDivs={setDivs}
+              divs={divs}
+              setDisplayMethod={setDisplayMethod}
+            />
+          }
+
+          {displayMethod === "class" &&
+            <ClassPanel
+              setDisplayMethod={setDisplayMethod}
+              setClassPack = {setClassPack}
+            />
+          }
+
         </div>
       : 
         <div className={classes.hiden__panel}></div>
