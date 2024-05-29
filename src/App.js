@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Panel from './components/UI/Panel/Panel';
 import WorkingField from './components/UI/WorkingField/WorkingField';
-import { getArray } from './utils/getArray';
 
 function App() {
 
@@ -14,7 +13,7 @@ function App() {
   );
 
   useEffect(() => {
-    if (divs != -1) setDivArr([...divArr, {index: divs, style: {}}])
+    if (divs != -1) setDivArr([...divArr, {ref: React.createRef(), index: divs, style: {}}])
   },[divs])
 
   return (
@@ -25,6 +24,7 @@ function App() {
         displayMethod = {displayMethod}
         setDisplayMethod = {setDisplayMethod}
         setClassPack = {setClassPack}
+        divArr = {divArr}
       />
       <WorkingField
         divArr = {divArr}
