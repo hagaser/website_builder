@@ -3,19 +3,22 @@ import classes from "./ButtonPanel.module.css";
 import MyButton from "../MyButton/MyButton";
 import { saveAs } from 'file-saver';
 
-const ButtonPanel = ({ setDivs, divs, setDisplayMethod, divArr }) => {
+const ButtonPanel = ({ setDivs, divs, setDisplayMethod, divArr, classArr }) => {
 
-  let app =""
+  let app = ""
+  let headPart = "<style>\n"
   const fpCode = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+`
+const spCode = `</style>
 </head>
 <body>
 `;
-const spCode = `
+const lpCode = `
 </body>
 </html>`;
 
@@ -26,11 +29,24 @@ const spCode = `
 
     divArr.forEach(divEl => {
       const coordinates = (divEl.ref.current.style.transform).match(/translate\(([^,]+), ([^)]+)\)/)
-      const styles = " " + Object.entries(divEl.style).map(([property, value]) => `${property}: ${value};`).join(' ')
-      app = app + `<div style="position: absolute; left: ${coordinates[1]}; top: ${coordinates[2]}; background-color: #0074D9; width: 100px; height: 100px;${styles}"></div>\n`
+      headPart = headPart + `.def-and-pos${divEl.index} {\n  position: absolute;\n  left: ${coordinates[1]};\n  top: ${coordinates[2]};\n  background-color: #0074D9;\n  width: 100px;\n  height: 100px;\n}\n`
+      if (divEl.class) {
+        app = app + `<div class="${divEl.class} def-and-pos${divEl.index}"></div>\n`
+      } else {
+        app = app + `<div class="def-and-pos${divEl.index}"></div>\n`
+      }
     });
+    classArr.forEach(classObject => {
+      let classBlock = ""
+      let classOb = {...classObject}
+      classBlock = `.${classOb.className} {\n`
+      delete classOb.className
+      classBlock = classBlock + Object.entries(classOb).map(([property, value]) => `  ${property}: ${value};\n`).join('')
+      classBlock = classBlock + "}\n"
+      headPart = headPart + classBlock;
+    })
 
-    const code = fpCode + app + spCode;
+    const code = fpCode + headPart + spCode + app + lpCode;
     const blob = new Blob([code], { type: "text/plain" });
     saveAs(blob, fileName);
     app = ""

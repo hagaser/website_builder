@@ -5,3 +5,27 @@
 .input__block {
   margin-top: 10px;
 }
+
+.button__panel {
+  display: flex;
+  justify-content: space-between;
+}
+.button__div {
+  width: 90px;
+}
+.classes {
+  text-align: center;
+  width: 70px;
+}
+.right__btn__panel {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.chosen__btn {
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 1px solid;
+  padding: 3px;
+  min-width: 65px; 
+}

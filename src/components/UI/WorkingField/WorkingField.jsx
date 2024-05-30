@@ -1,30 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./WorkingField.module.css"
 import Draggable from "react-draggable";
 
-const WorkingField = ({ divArr, displayMethod, setDivArr, classPack }) => {
+const WorkingField = ({ divArr, displayMethod, setDivArr, chosenClass, classArr }) => {
 
-  const changeStyle = (index) => {
-    if (displayMethod === "class") {
-      const updatedDivArr = divArr.map((div, i) => {
+  const changeStyle = (index, elArr, elName) => {
+    if (displayMethod === "class" && chosenClass) {
+      const updatedelArr = elArr.map((el, i) => {
         if (i === index) {
-          let classStyles = classPack;
+          let classStyles = {...classArr.find(item => item.className === chosenClass)};
           delete classStyles.className
-          return { ...div, style: classStyles };
+          const newClass = chosenClass
+          return { ...el, style: classStyles, class: newClass };
         }
-        return div;
+        return el;
       });
-      setDivArr(updatedDivArr);
+      if (elName === "div") {
+        setDivArr(updatedelArr);
+      }
     }
   }
-
-  useEffect(() => {
-    divArr.forEach(divEl => {
-      const coordinate = (divEl.ref.current.style.transform).match(/translate\(([^,]+), ([^)]+)\)/)
-      const styles = " " + Object.entries(divEl.style).map(([property, value]) => `${property}: ${value};`).join(' ')
-      console.log(`<div style="position: absolute; left: ${coordinate[1]}; top: ${coordinate[2]}; background-color: #0074D9; width: 100px; height: 100px;${styles}"></div>`)
-    });
-  }, [divArr])
 
   return (
     <div className={classes.work__field}>
@@ -33,7 +28,7 @@ const WorkingField = ({ divArr, displayMethod, setDivArr, classPack }) => {
             defaultPosition={{x: 500, y: 0}}
             bounds={{left: 0, top: 0}}
         >
-          <div className={classes.draggable__div} key={div.index} style={div.style} ref={div.ref} onClick={() => changeStyle(div.index)}>
+          <div className={classes.draggable__div} key={div.index} style={div.style} ref={div.ref} onClick={() => changeStyle(div.index, divArr, "div")}>
           </div>
         </Draggable>
       )}

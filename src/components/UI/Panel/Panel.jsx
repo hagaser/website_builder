@@ -3,7 +3,7 @@ import classes from "./Panel.module.css";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import ClassPanel from "../ClassPanel/ClassPanel";
 
-const Panel = ({ setDivs, divs, displayMethod, setDisplayMethod, setClassPack, divArr }) => {
+const Panel = ({ setDivs, divs, displayMethod, setDisplayMethod, divArr, classArr, setClassArr, chosenClass, setChosenClass }) => {
   
   const [displayPanel, setDisplayPanel] = useState(true);
 
@@ -23,13 +23,17 @@ const Panel = ({ setDivs, divs, displayMethod, setDisplayMethod, setClassPack, d
               divs={divs}
               setDisplayMethod={setDisplayMethod}
               divArr = {divArr}
+              classArr = {classArr}
             />
           }
 
           {displayMethod === "class" &&
             <ClassPanel
               setDisplayMethod={setDisplayMethod}
-              setClassPack = {setClassPack}
+              classArr = {classArr}
+              setClassArr = {setClassArr}
+              chosenClass = {chosenClass}
+              setChosenClass = {setChosenClass}
             />
           }
 

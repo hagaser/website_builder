@@ -8,9 +8,8 @@ function App() {
   const [divs, setDivs] = useState(-1);
   const [displayMethod, setDisplayMethod] = useState("buttons");
   const [divArr, setDivArr] = useState([]);
-  const [classPack, setClassPack] = useState(
-    {height: "0px", width: "0px", className: "class1"}
-  );
+  const [chosenClass, setChosenClass] = useState("");
+  const [classArr, setClassArr] = useState([]);
 
   useEffect(() => {
     if (divs != -1) setDivArr([...divArr, {ref: React.createRef(), index: divs, style: {}}])
@@ -23,14 +22,18 @@ function App() {
         divs = {divs}
         displayMethod = {displayMethod}
         setDisplayMethod = {setDisplayMethod}
-        setClassPack = {setClassPack}
         divArr = {divArr}
+        setChosenClass = {setChosenClass}
+        chosenClass = {chosenClass}
+        classArr = {classArr}
+        setClassArr = {setClassArr}
       />
       <WorkingField
         divArr = {divArr}
         displayMethod = {displayMethod}
         setDivArr = {setDivArr}
-        classPack = {classPack}
+        chosenClass = {chosenClass}
+        classArr = {classArr}
       />
     </div>
   );
