@@ -1,5 +1,8 @@
 * {
+  /* bloack-model */
   margin: 0;
   padding: 0;
+
+  /* other */
   box-sizing: border-box;
 }

@@ -1,13 +1,34 @@
 import React, { useState } from "react";
-import classes from "./Panel.module.css";
-import ButtonPanel from "../ButtonPanel/ButtonPanel";
-import ClassPanel from "../ClassPanel/ClassPanel";
 
-const Panel = ({ inputArr, buttonArr, inputBlocks, setInputBlocks, buttonBlocks, setButtonBlocks, setDivs, divs, displayMethod, setDisplayMethod, divArr, classArr, setClassArr, chosenClass, setChosenClass, setTextBlocks, textBlocks, textBlockArr }) => {
+// styles //
+import classes from "./Panel.module.css";
+
+// components //
+import ButtonPanel from "../ButtonPanel/ButtonPanel";
+import ClassPanel from "../../ClassPanel";
+
+const Panel = ({
+
+  // to ButtonPanel //
+  divs, inputBlocks, buttonBlocks, textBlocks, // number of array elements
+  divArr, inputArr, buttonArr, textBlockArr, // arrays of elements
+  setDivs, setInputBlocks, setButtonBlocks, setTextBlocks, // change the number of array elements
+  // end to ButtonPanel //
+
+  // to ClassPanel //
+  setClassArr, chosenClass, setChosenClass,
+
+  // to both //
+  setDisplayMethod, classArr,
+
+  // to noone //
+  displayMethod,
+
+}) => {
   
   const [displayPanel, setDisplayPanel] = useState(true);
 
-  const rootClasses = [classes.panel__block];
+  const rootClasses = [classes.panel__block]; // changes display to none
   if (!displayPanel) rootClasses.push(classes.hiden__block);
 
   return (
@@ -19,28 +40,39 @@ const Panel = ({ inputArr, buttonArr, inputBlocks, setInputBlocks, buttonBlocks,
 
           {displayMethod === "buttons" &&
             <ButtonPanel
-              setDivs={setDivs}
-              divs={divs}
-              setDisplayMethod={setDisplayMethod}
-              divArr = {divArr}
-              classArr = {classArr}
-              setTextBlocks = {setTextBlocks}
-              textBlocks = {textBlocks}
-              textBlockArr = {textBlockArr}
+
+              // number of array elements //
+              divs = {divs}
               inputBlocks = {inputBlocks}
-              setInputBlocks = {setInputBlocks}
               buttonBlocks = {buttonBlocks}
-              setButtonBlocks = {setButtonBlocks}
+              textBlocks = {textBlocks}
+
+              // arrays of elements //
+              divArr = {divArr}
               inputArr = {inputArr}
               buttonArr = {buttonArr}
+              textBlockArr = {textBlockArr}
+
+              // change the number of array elements //
+              setDivs = {setDivs}
+              setInputBlocks = {setInputBlocks}
+              setButtonBlocks = {setButtonBlocks}
+              setTextBlocks = {setTextBlocks}
+
+              // other //
+              setDisplayMethod = {setDisplayMethod}
+              classArr = {classArr}
+
             />
           }
 
           {displayMethod === "class" &&
             <ClassPanel
-              setDisplayMethod={setDisplayMethod}
+              setDisplayMethod = {setDisplayMethod}
+
               classArr = {classArr}
               setClassArr = {setClassArr}
+
               chosenClass = {chosenClass}
               setChosenClass = {setChosenClass}
             />
@@ -56,14 +88,14 @@ const Panel = ({ inputArr, buttonArr, inputBlocks, setInputBlocks, buttonBlocks,
       ? <button
           className={classes.hide__panel}
           onClick={() => setDisplayPanel(false)}
-        >
+        > {/* "<" button */}
           &lt;
         </button>
 
       : <button
           className={classes.hide__panel}
           onClick={() => setDisplayPanel(true)}
-        >
+        > {/* ">" button */}
           &gt;
         </button>
 
@@ -73,4 +105,4 @@ const Panel = ({ inputArr, buttonArr, inputBlocks, setInputBlocks, buttonBlocks,
   );
 };
 
-export default Panel
+export default Panel;

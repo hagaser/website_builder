@@ -1,73 +1,139 @@
 import React, { useEffect, useState } from 'react';
+
+// styles //
 import './App.css';
+
+// components //
 import Panel from './components/UI/Panel/Panel';
 import WorkingField from './components/UI/WorkingField/WorkingField';
 
+
 function App() {
 
+  // number of array elements //
   const [divs, setDivs] = useState(-1);
   const [inputBlocks, setInputBlocks] = useState(-1);
   const [buttonBlocks, setButtonBlocks] = useState(-1);
   const [textBlocks, setTextBlocks] = useState({index: -1, type: ""});
-  const [displayMethod, setDisplayMethod] = useState("buttons");
+
+  // arrays //
   const [divArr, setDivArr] = useState([]);
-  const [buttonArr, setButtonArr] = useState([]);
   const [inputArr, setInputArr] = useState([]);
+  const [buttonArr, setButtonArr] = useState([]);
   const [textBlockArr, setTextBlockArr] = useState([]);
+
+  // other //
+  const [displayMethod, setDisplayMethod] = useState("buttons");
   const [chosenClass, setChosenClass] = useState("");
   const [classArr, setClassArr] = useState([]);
 
-  useEffect(() => {
-    if (divs != -1) setDivArr([...divArr, {ref: React.createRef(), index: divs, style: {}}])
-  },[divs])
 
   useEffect(() => {
-    if (inputBlocks != -1) setInputArr([...inputArr, {ref: React.createRef(), index: inputBlocks, style: {}}])
-  },[inputBlocks])
+
+    if (divs != -1) {
+      setDivArr([...divArr, {
+        ref: React.createRef(),
+        index: divs,
+        style: {},
+        type: "div",
+      }]);
+    }
+
+  },[divs]);
 
   useEffect(() => {
-    if (buttonBlocks != -1) setButtonArr([...buttonArr, {ref: React.createRef(), index: buttonBlocks, style: {}}])
-  },[buttonBlocks])
+
+    if (inputBlocks != -1) {
+      setInputArr([...inputArr, {
+        ref: React.createRef(),
+        index: inputBlocks,
+        style: {},
+        type: "input",
+      }]);
+    }
+
+  },[inputBlocks]);
 
   useEffect(() => {
-    if (textBlocks.index != -1) setTextBlockArr([...textBlockArr, {ref: React.createRef(), index: textBlocks.index, style: textBlocks.style, type: textBlocks.type, value: ""}])
-  },[textBlocks])
+
+    if (buttonBlocks != -1) {
+      setButtonArr([...buttonArr, {
+        ref: React.createRef(),
+        index: buttonBlocks,
+        style: {},
+        type: "button",
+      }]);
+    }
+
+  },[buttonBlocks]);
+
+  useEffect(() => {
+
+    if (textBlocks.index != -1) {
+      setTextBlockArr([...textBlockArr, {
+        ref: React.createRef(),
+        index: textBlocks.index,
+        style: textBlocks.style,
+        type: textBlocks.type,
+        value: ""
+      }]);
+    }
+
+  },[textBlocks]);
+
 
   return (
     <div className="App">
+
       <Panel
-        setDivs = {setDivs}
+        // number of array elements //
         divs = {divs}
-        displayMethod = {displayMethod}
-        setDisplayMethod = {setDisplayMethod}
+        inputBlocks = {inputBlocks}
+        buttonBlocks = {buttonBlocks}
+        textBlocks = {textBlocks}
+
+        // change the number of array elements //
+        setDivs = {setDivs}
+        setInputBlocks = {setInputBlocks}
+        setButtonBlocks = {setButtonBlocks}
+        setTextBlocks = {setTextBlocks}
+
+        // arrays of elements //
         divArr = {divArr}
+        inputArr = {inputArr}
+        buttonArr = {buttonArr}
+        textBlockArr = {textBlockArr}
+
+        // other //
+        setDisplayMethod = {setDisplayMethod}
+        displayMethod = {displayMethod}
+
         setChosenClass = {setChosenClass}
         chosenClass = {chosenClass}
-        classArr = {classArr}
+
         setClassArr = {setClassArr}
-        setTextBlocks = {setTextBlocks}
-        textBlocks = {textBlocks}
+        classArr = {classArr}
+      />
+
+      <WorkingField
+        // arrays of elements //
+        divArr = {divArr}
         textBlockArr = {textBlockArr}
-        inputBlocks = {inputBlocks}
-        setInputBlocks = {setInputBlocks}
-        buttonBlocks = {buttonBlocks}
-        setButtonBlocks = {setButtonBlocks}
         inputArr = {inputArr}
         buttonArr = {buttonArr}
-      />
-      <WorkingField
-        divArr = {divArr}
-        displayMethod = {displayMethod}
+
+        // change the arrays of elements //
         setDivArr = {setDivArr}
-        chosenClass = {chosenClass}
-        classArr = {classArr}
-        textBlockArr = {textBlockArr}
         setTextBlockArr = {setTextBlockArr}
         setInputArr = {setInputArr}
-        inputArr = {inputArr}
         setButtonArr = {setButtonArr}
-        buttonArr = {buttonArr}
+
+        // other //
+        displayMethod = {displayMethod}
+        chosenClass = {chosenClass}
+        classArr = {classArr}
       />
+
     </div>
   );
 }

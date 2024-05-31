@@ -1,6 +1,10 @@
 .mybutton {
-  background-color: transparent;
-  border: 1px solid;
+
+  /* bloack-model */
   padding: 3px;
   min-width: 65px; 
+  
+  /* decorations */
+  background-color: transparent;
+  border: 1px solid;
 }

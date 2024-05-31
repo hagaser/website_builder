@@ -1,5 +1,9 @@
 .myinput {
+
+  /* bloack-model */
   width: 100%;
+
+  /* decorations */
   border: 1px solid;
   background-color: white;
 }

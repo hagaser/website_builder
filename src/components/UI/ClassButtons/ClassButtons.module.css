@@ -1,11 +1,3 @@
-.form {
-  width: 70%;
-  margin-top: 30px;
-}
-.input__block {
-  margin-top: 10px;
-}
-
 .button__panel {
   display: flex;
   justify-content: space-between;
@@ -14,8 +6,12 @@
   width: 90px;
 }
 .classes {
-  text-align: center;
+
+  /* block-model */
   width: 70px;
+
+  /* typography */
+  text-align: center;
 }
 .right__btn__panel {
   display: flex;
@@ -23,9 +19,13 @@
   flex-wrap: wrap;
 }
 .chosen__btn {
+  
+  /* block-model */
+  padding: 3px;
+  min-width: 65px;
+
+  /* decoration */
   background-color: #000000;
   color: #FFFFFF;
   border: 1px solid;
-  padding: 3px;
-  min-width: 65px;
 }

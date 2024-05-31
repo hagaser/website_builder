@@ -1,36 +1,59 @@
 .work_field {
   width: 100%;
 }
+
 .draggable__div {
-  position: absolute;
+
+  /* bloack-model */
   width: 100px;
   height: 100px;
+
+  /* decorations */
   background-color: #0074D9;
-  cursor: grab;
 }
+
 .draggable__text {
-  position: absolute;
-  cursor: grab;
+
+  /* bloack-model */
   width: 100px;
   height: 100px;
-  resize: none;
+
+  /* decorations */
   background-color: transparent;
+
+  /* other */
+  resize: none;
 }
+
 .draggable__text::-webkit-scrollbar {
   display: none;
 }
+
 .draggable__inp {
-  position: absolute;
-  cursor: grab;
   width: 300px;
   height: 30px;
 }
+
 .draggable__btn {
-  position: absolute;
-  cursor: grab;
+
+  /* bloack-model */
   width: 70px;
   height: 20px;
-  resize: none;
-  background-color: #cccccc;
+
+  /* typography */
   font-size: 15px;
+
+  /* decorations */
+  background-color: #cccccc;
+
+  /* other */
+  resize: none;
+}
+
+.draggable {
+  /* position */
+  position: absolute;
+
+  /* other */
+  cursor: grab;
 }
