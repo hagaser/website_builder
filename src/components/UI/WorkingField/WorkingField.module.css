@@ -8,3 +8,29 @@
   background-color: #0074D9;
   cursor: grab;
 }
+.draggable__text {
+  position: absolute;
+  cursor: grab;
+  width: 100px;
+  height: 100px;
+  resize: none;
+  background-color: transparent;
+}
+.draggable__text::-webkit-scrollbar {
+  display: none;
+}
+.draggable__inp {
+  position: absolute;
+  cursor: grab;
+  width: 300px;
+  height: 30px;
+}
+.draggable__btn {
+  position: absolute;
+  cursor: grab;
+  width: 70px;
+  height: 20px;
+  resize: none;
+  background-color: #cccccc;
+  font-size: 15px;
+}

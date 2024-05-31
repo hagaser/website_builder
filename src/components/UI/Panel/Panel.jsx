@@ -3,7 +3,7 @@ import classes from "./Panel.module.css";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import ClassPanel from "../ClassPanel/ClassPanel";
 
-const Panel = ({ setDivs, divs, displayMethod, setDisplayMethod, divArr, classArr, setClassArr, chosenClass, setChosenClass }) => {
+const Panel = ({ inputArr, buttonArr, inputBlocks, setInputBlocks, buttonBlocks, setButtonBlocks, setDivs, divs, displayMethod, setDisplayMethod, divArr, classArr, setClassArr, chosenClass, setChosenClass, setTextBlocks, textBlocks, textBlockArr }) => {
   
   const [displayPanel, setDisplayPanel] = useState(true);
 
@@ -24,6 +24,15 @@ const Panel = ({ setDivs, divs, displayMethod, setDisplayMethod, divArr, classAr
               setDisplayMethod={setDisplayMethod}
               divArr = {divArr}
               classArr = {classArr}
+              setTextBlocks = {setTextBlocks}
+              textBlocks = {textBlocks}
+              textBlockArr = {textBlockArr}
+              inputBlocks = {inputBlocks}
+              setInputBlocks = {setInputBlocks}
+              buttonBlocks = {buttonBlocks}
+              setButtonBlocks = {setButtonBlocks}
+              inputArr = {inputArr}
+              buttonArr = {buttonArr}
             />
           }
 

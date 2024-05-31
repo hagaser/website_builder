@@ -7,9 +7,11 @@ const ClassPanel = ({ setDisplayMethod, classArr, setClassArr, chosenClass, setC
 
   const [inputs, setInputs] = useState ([
     {name: "class name:", inpName: "className", value: "class1"},
-    {name: "width:", inpName: "width", value: "100px"},
-    {name: "height:", inpName: "height", value: "100px"},
-    {name: "background-color:", inpName: "background-color", value: "#0074D9"},
+    {name: "width:", inpName: "width", value: ""},
+    {name: "height:", inpName: "height", value: ""},
+    {name: "background-color:", inpName: "background-color", value: ""},
+    {name: "color:", inpName: "color", value: ""},
+    {name: "border:", inpName: "border", value: ""},
   ]);
 
   const handleInputChange = (e, inpName) => {
@@ -23,7 +25,9 @@ const ClassPanel = ({ setDisplayMethod, classArr, setClassArr, chosenClass, setC
     if (!classArr.find(item => item.className === inputs[0].value)) {
       let classPack = {}
       inputs.forEach(inp => {
-        classPack[inp.inpName] = inp.value;
+        if (inp.value) {
+          classPack[inp.inpName] = inp.value;
+        }
       });
       setClassArr([...classArr, classPack])
     }
