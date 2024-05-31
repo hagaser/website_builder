@@ -34,10 +34,14 @@ const WorkingField = ({
           let classStyles = // get class by name chosenClass
           {...classArr.find(item => item.className === chosenClass)};
           delete classStyles.className; // only styles stayed
+          if (el.defStyle) {
+            return { ...el, // return updated element
+                    style: { ...el.defStyle, ...classStyles },
+                    class: chosenClass };
+          }
           return { ...el, // return updated element
-                  style: { ...el.style, ...classStyles },
+                  style: { ...classStyles },
                   class: chosenClass };
-
         }
         return el; // if not changed element
       });

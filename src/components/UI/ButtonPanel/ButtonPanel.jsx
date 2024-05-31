@@ -67,7 +67,7 @@ const ButtonPanel = ({
     function: () => setTextBlocks({
       index: textBlocks.index + 1,
       type: "h1",
-      style: {
+      defStyle: {
         "font-size": "32px",
         "font-family" : "Helvetica Neue",
         "font-weight": "700"
@@ -78,7 +78,7 @@ const ButtonPanel = ({
     function: () => setTextBlocks({
       index: textBlocks.index + 1,
       type: "h2",
-      style: {
+      defStyle: {
         "font-size": "24px",
         "font-family" : "Helvetica Neue",
         "font-weight": "700"
@@ -89,7 +89,7 @@ const ButtonPanel = ({
     function: () => setTextBlocks({
       index: textBlocks.index + 1,
       type: "h3",
-      style: {
+      defStyle: {
         "font-size": "19px",
         "font-family" : "Helvetica Neue",
         "font-weight": "700"
@@ -100,7 +100,7 @@ const ButtonPanel = ({
     function: () => setTextBlocks({
       index: textBlocks.index + 1,
       type: "h4",
-      style: {
+      defStyle: {
         "font-size": "16px",
         "font-family" : "Helvetica Neue",
         "font-weight": "700"
@@ -111,7 +111,7 @@ const ButtonPanel = ({
     function: () => setTextBlocks({
       index: textBlocks.index + 1,
       type: "h5",
-      style: {
+      defStyle: {
         "font-size": "14px",
         "font-family" : "Helvetica Neue",
         "font-weight": "700"
@@ -122,7 +122,7 @@ const ButtonPanel = ({
     function: () => setTextBlocks({
       index: textBlocks.index + 1,
       type: "h6",
-      style: {
+      defStyle: {
         "font-size": "12px",
         "font-family" : "Helvetica Neue",
         "font-weight": "700"

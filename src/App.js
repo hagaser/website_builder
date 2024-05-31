@@ -73,7 +73,8 @@ function App() {
       setTextBlockArr([...textBlockArr, {
         ref: React.createRef(),
         index: textBlocks.index,
-        style: textBlocks.style,
+        style: textBlocks.defStyle,
+        defStyle: textBlocks.defStyle,
         type: textBlocks.type,
         value: ""
       }]);
