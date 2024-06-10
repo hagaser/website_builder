@@ -16,10 +16,10 @@ const Panel = ({
   // end to ButtonPanel //
 
   // to ClassPanel //
-  setClassArr, chosenClass, setChosenClass,
+  setClassArr, setDeletedClass,
 
   // to both //
-  setDisplayMethod, classArr,
+  setDisplayMethod, classArr, setChosenClass, chosenClass,
 
   // to noone //
   displayMethod,
@@ -62,6 +62,8 @@ const Panel = ({
               // other //
               setDisplayMethod = {setDisplayMethod}
               classArr = {classArr}
+              setChosenClass = {setChosenClass}
+              chosenClass = {chosenClass}
 
             />
           }
@@ -69,6 +71,7 @@ const Panel = ({
           {displayMethod === "class" &&
             <ClassPanel
               setDisplayMethod = {setDisplayMethod}
+              setDeletedClass = {setDeletedClass}
 
               classArr = {classArr}
               setClassArr = {setClassArr}

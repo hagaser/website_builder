@@ -39,7 +39,7 @@ const defStyles = {
   const getElementsCode = (allArr) => {
     allArr.forEach(arr => { // for each array
       arr.forEach(el => { // for each element in array
-
+        if (el.deleted) return; // if deleted then don't add anything
         // from string "translate(551px, 111px)" get numbers and "px"
         const coordinates = (el.ref.current.style.transform)
                             .match(/translate\(([^,]+), ([^)]+)\)/);
@@ -53,7 +53,7 @@ const defStyles = {
         ) {
           // make and add class block //
           headPart = headPart + 
-`.def-and-pos-${el.type}${el.index} {
+`.def-and-pos-${el.type}-${el.index} {
   position: absolute;
   left: ${coordinates[1]};
   top: ${+coordinates[2]
@@ -63,7 +63,7 @@ ${defStyles[el.type]}}\n`;
         } else { // if not text element
           // make and add class block //
           headPart = headPart + 
-`.def-and-pos-${el.type}${el.index} {
+`.def-and-pos-${el.type}-${el.index} {
   position: absolute;
   left: ${coordinates[1]};
   top: ${coordinates[2]};
@@ -77,7 +77,7 @@ ${defStyles[el.type]}}\n`;
             app = app + 
             `  <${el.type
             } class="${el.class
-                   } def-and-pos-${el.type}${el.index
+                   } def-and-pos-${el.type}-${el.index
             }">${
                 el.value
             }</${el.type}>\n`;
@@ -86,7 +86,7 @@ ${defStyles[el.type]}}\n`;
 
             app = app + `  <${el.type
             } class="${el.class
-                   } def-and-pos-${el.type}${el.index}"></${el.type}>\n`;
+                   } def-and-pos-${el.type}-${el.index}"></${el.type}>\n`;
 
           }
 
@@ -94,14 +94,14 @@ ${defStyles[el.type]}}\n`;
           if (el.value) { // if have children
 
             app = app + `  <${el.type
-            } class="def-and-pos-${el.type}${el.index
+            } class="def-and-pos-${el.type}-${el.index
             }">${
               el.value
             }</${el.type}>\n`;
 
           } else { // if don't have children
             app = app + `  <${el.type
-            } class="def-and-pos-${el.type}${el.index
+            } class="def-and-pos-${el.type}-${el.index
             }"></${el.type}>\n`;
           }
 

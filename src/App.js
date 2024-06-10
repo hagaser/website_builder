@@ -26,6 +26,7 @@ function App() {
   const [displayMethod, setDisplayMethod] = useState("buttons");
   const [chosenClass, setChosenClass] = useState("");
   const [classArr, setClassArr] = useState([]);
+  const [deletedClass, setDeletedClass] = useState(false);
 
 
   useEffect(() => {
@@ -82,6 +83,14 @@ function App() {
 
   },[textBlocks]);
 
+  // if class deleted in general removes the styles of this class//
+  const delDeletedStyle = (arrOfArr, arrOfFunc, func) => {
+    for (let i = 0; i < arrOfArr.length; i++) {
+      func(deletedClass, arrOfArr[i], arrOfFunc[i]);
+    }
+    setDeletedClass(false);
+  }
+
 
   return (
     <div className="App">
@@ -114,6 +123,8 @@ function App() {
 
         setClassArr = {setClassArr}
         classArr = {classArr}
+
+        setDeletedClass = {setDeletedClass}
       />
 
       <WorkingField
@@ -133,6 +144,8 @@ function App() {
         displayMethod = {displayMethod}
         chosenClass = {chosenClass}
         classArr = {classArr}
+        delDeletedStyle = {delDeletedStyle}
+        deletedClass = {deletedClass}
       />
 
     </div>

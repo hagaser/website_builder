@@ -2,9 +2,11 @@
   display: flex;
   justify-content: space-between;
 }
+
 .button__div {
   width: 90px;
 }
+
 .classes {
 
   /* block-model */
@@ -13,11 +15,13 @@
   /* typography */
   text-align: center;
 }
+
 .right__btn__panel {
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
 }
+
 .chosen__btn {
   
   /* block-model */

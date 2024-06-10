@@ -6,9 +6,10 @@ import ClassInputs from "./UI/ClassInputs/ClassInputs";
 
 
 const ClassPanel = ({
-  setDisplayMethod,
+  setDisplayMethod, 
   classArr, setClassArr,
-  chosenClass, setChosenClass
+  chosenClass, setChosenClass,
+  setDeletedClass,
 }) => {
 
   // add here new styles //
@@ -19,6 +20,9 @@ const ClassPanel = ({
     {name: "background-color:", inpName: "background-color", value: ""},
     {name: "color:", inpName: "color", value: ""},
     {name: "border:", inpName: "border", value: ""},
+    {name: "font-size:", inpName: "font-size", value: ""},
+    {name: "cursor:", inpName: "cursor", value: ""},
+    {name: "z-index:", inpName: "z-index", value: ""},
   ]);
 
   // changes input values //
@@ -57,7 +61,10 @@ const ClassPanel = ({
       <ClassButtons
         setDisplayMethod = {setDisplayMethod}
         saveClass = {saveClass}
+        setDeletedClass = {setDeletedClass}
+
         classArr = {classArr}
+        setClassArr = {setClassArr}
 
         chosenClass = {chosenClass}
         setChosenClass = {setChosenClass}

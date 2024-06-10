@@ -35,6 +35,8 @@ const ButtonPanel = ({
   // other //
   setDisplayMethod,
   classArr,
+  setChosenClass,
+  chosenClass,
 }) => {
 
   const saveFile = () => {
@@ -146,6 +148,22 @@ const ButtonPanel = ({
 
       {/* left button panel */}
       <div className={classes.button__div}>
+
+        {chosenClass === "delete element"
+          ?
+          <MyButton
+            onClick={() => setChosenClass("")} className={classes.chosen__btn}
+          >
+            delete element
+          </MyButton>
+          : 
+          <MyButton
+            onClick={() => setChosenClass("delete element")}
+          >
+            delete element
+          </MyButton>
+        }
+
         {buttonsComponents.map(btn =>
 
           <MyButton 
