@@ -1,9 +1,19 @@
-export const getCode = (allArr, classArr) => {
+import { getPercentSize } from "./getPercentSize";
+
+
+export const getCode = (elements, classArr) => {
+
+  const hundredWidth = getPercentSize(100, "width");
+  const hundredHeight = getPercentSize(100, "height");
 
   let app = "";
-  let headPart = "<style>\n";
+  let headPart = 
+`<style> 
+* {
+  margin: 0;
+}`;
 
-  const fpCode = 
+const fpCode = // first part
 `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,111 +22,94 @@ export const getCode = (allArr, classArr) => {
   <title>Document</title>
 `;
 
-const spCode =
+const spCode = // second part
 `</style>
 </head>
 <body>
 `;
 
-const lpCode =
+const lpCode = // last part
 `</body>
 </html>`;
 
 const defStyles = {
-  div: "  background-color: #0074D9;\n"+
-  "  width: 100px;\n  height: 100px;\n",
-  input: "  width: 300px;\n  height: 30px;\n",
-  button: "  width: 70px;\n  height: 20px;\n",
-  h6: "  width: 100px;\n  height: 100px;\n",
-  h5: "  width: 100px;\n  height: 100px;\n",
-  h4: "  width: 100px;\n  height: 100px;\n",
-  h3: "  width: 100px;\n  height: 100px;\n",
-  h2: "  width: 100px;\n  height: 100px;\n",
-  h1: "  width: 100px;\n  height: 100px;\n",
-  p: "  width: 100px;\n  height: 100px;\n",
+  div: {backgroundColor: "#0074D9",
+  width: hundredWidth,  height: hundredHeight},
+  input: {width: getPercentSize(300, "width"), height: getPercentSize(30, "height")},
+  button: {width: getPercentSize(70, "width"), height: getPercentSize(20, "height")},
+  h6: {width: hundredWidth, height: hundredHeight},
+  h5: {width: hundredWidth, height: hundredHeight},
+  h4: {width: hundredWidth, height: hundredHeight},
+  h3: {width: hundredWidth, height: hundredHeight},
+  h2: {width: hundredWidth, height: hundredHeight},
+  h1: {width: hundredWidth, height: hundredHeight},
+  p: {width: hundredWidth, height: hundredHeight},
 };
 
-  const getElementsCode = (allArr) => {
-    allArr.forEach(arr => { // for each array
-      arr.forEach(el => { // for each element in array
+
+  const getElementsCode = (elements) => {
+      elements.forEach((el, i) => {
         if (el.deleted) return; // if deleted then don't add anything
-        // from string "translate(551px, 111px)" get numbers and "px"
+
+        // get element default styles and delete that is changed by class
+        let formatedStyles = "";
+        if (!el.class) {
+          formatedStyles = defStyles[el.type];
+        } else {
+
+          const defElStyles = defStyles[el.type];
+          const elementClass = {...classArr.find(item => item.className === el.class)};
+
+          Object.keys(defElStyles).forEach(style => {
+            // if there is no such style then get default
+
+            if (!elementClass[style]) {
+              formatedStyles = formatedStyles +
+                  // "backgroundColor" => "background-color"
+              `  ${style.replace(/([A-Z])/g, "-$1").toLowerCase()}: ${defElStyles[style]};\n`;
+            } 
+
+          })
+
+        }
+
+        // from string "translate(551px, 111px)" => 551, 111
         const coordinates = (el.ref.current.style.transform)
-                            .match(/translate\(([^,]+), ([^)]+)\)/);
+                            .match(/translate\((\d+)px, (\d+)px\)/);
 
-        if ( // if text element
+        const left = getPercentSize(coordinates[1], "width");
+        const top = getPercentSize(coordinates[2], "height");
 
-          el.type.substr(0, (el.type).length - 1) === "h"
-          ||
-          el.type === "p"
-
-        ) {
           // make and add class block //
           headPart = headPart + 
-`.def-and-pos-${el.type}-${el.index} {
+`.def-and-pos-${el.type}-${i} {
   position: absolute;
-  left: ${coordinates[1]};
-  top: ${+coordinates[2]
-        .substr(0, coordinates[2].length - 2) - 20}px;
-${defStyles[el.type]}}\n`;
-
-        } else { // if not text element
-          // make and add class block //
-          headPart = headPart + 
-`.def-and-pos-${el.type}-${el.index} {
-  position: absolute;
-  left: ${coordinates[1]};
-  top: ${coordinates[2]};
-${defStyles[el.type]}}\n`;
+  left: ${left};
+  top: ${top};
+${formatedStyles}}\n`;
+        
+        // make and add element block
+        app = app + `  <${el.type} class="`;
+        if (el.class) {
+          app = app + `${el.class} `;
         }
-
-        if (el.class) { // if there is a class
-          if (el.value) { // if have children
-
-            // make and add element //
-            app = app + 
-            `  <${el.type
-            } class="${el.class
-                   } def-and-pos-${el.type}-${el.index
-            }">${
-                el.value
-            }</${el.type}>\n`;
-
-          } else { // if don't have children
-
-            app = app + `  <${el.type
-            } class="${el.class
-                   } def-and-pos-${el.type}-${el.index}"></${el.type}>\n`;
-
-          }
-
-        } else { // if there is no class
-          if (el.value) { // if have children
-
-            app = app + `  <${el.type
-            } class="def-and-pos-${el.type}-${el.index
-            }">${
-              el.value
-            }</${el.type}>\n`;
-
-          } else { // if don't have children
-            app = app + `  <${el.type
-            } class="def-and-pos-${el.type}-${el.index
-            }"></${el.type}>\n`;
-          }
-
+        app = app + `def-and-pos-${el.type}-${i}">`;
+        if (el.value) {
+          app = app + `${el.value}`;
         }
-      });
+        app = app + `</${el.type}>\n`;
     })
   }
 
-  getElementsCode(allArr);
+
+  getElementsCode(elements);
+  
 
   // get custom classes //
   classArr.forEach(classObject => {
 
     let classOb = {...classObject}; // copy
-    // get class name and make: ".class__name {"
+    // get class name and make: ".class__name {\n"
     let classBlock = `.${classOb.className} {\n`;
 
     delete classOb.className; // only styles stayed
@@ -124,12 +117,12 @@ ${defStyles[el.type]}}\n`;
     classBlock = classBlock + 
       Object
       .entries(classOb)
-      .map(([property, value]) => `  ${property}: ${value};\n`)
-      .join(''); // converts a style objects to a strings
+      .map(([property, value]) => `  ${property.replace(/([A-Z])/g, "-$1").toLowerCase()}: ${value};\n`)
+      .join(""); // converts a style objects to a strings
 
     classBlock = classBlock + "}\n";
     headPart = headPart + classBlock; // add class block
   })
 
-  return fpCode + headPart + spCode + app + lpCode
+  return fpCode + headPart + spCode + app + lpCode;
 }

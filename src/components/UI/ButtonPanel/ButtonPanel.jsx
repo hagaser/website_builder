@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 // styles //
 import classes from "./ButtonPanel.module.css";
@@ -8,135 +8,36 @@ import MyButton from "../MyButton/MyButton";
 
 // utils //
 import { getCode } from "../../../utils/getCode";
+import { useFillButtonData } from "../../../hooks/useFillButtonData";
 
 // other //
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 
 
-const ButtonPanel = ({
-  // number of array elements //
-  divs,
-  inputBlocks,
-  buttonBlocks,
-  textBlocks,
+const ButtonPanel = memo(({
+  elements, dispatchElements,
 
-  // arrays of elements //
-  divArr,
-  inputArr,
-  buttonArr,
-  textBlockArr,
+  chosenClassOrAction, setChosenClassOrAction,
 
-  // change the number of array elements //
-  setDivs,
-  setInputBlocks,
-  setButtonBlocks,
-  setTextBlocks,
-
-  // other //
   setDisplayMethod,
   classArr,
-  setChosenClass,
-  chosenClass,
 }) => {
 
   const saveFile = () => {
-    const code = getCode(
-      [divArr, inputArr, buttonArr, textBlockArr],
-      classArr
-      );
+    const code = getCode(elements, classArr);
     const fileName = "file.html";
-    // file with {text = code} and {name = fileName}
+    // file with {content = code} and {name = fileName}
     const blob = new Blob([code], { type: "text/plain" });
     saveAs(blob, fileName);
   };
 
   const setDisplay = () => {
+    setChosenClassOrAction("");
     setDisplayMethod("class");
   };
 
-  // buttonsComponents //
-  const buttonsComponents = [
-    {name: "div",
-    function: () => setDivs(divs + 1)},
-
-    {name: "button",
-    function: () => setButtonBlocks(buttonBlocks + 1)},
-
-    {name: "input",
-    function: () => setInputBlocks(inputBlocks + 1)},
-
-    {name: "h1",
-    function: () => setTextBlocks({
-      index: textBlocks.index + 1,
-      type: "h1",
-      defStyle: {
-        "font-size": "32px",
-        "font-family" : "Helvetica Neue",
-        "font-weight": "700"
-      }
-    })},
-    
-    {name: "h2",
-    function: () => setTextBlocks({
-      index: textBlocks.index + 1,
-      type: "h2",
-      defStyle: {
-        "font-size": "24px",
-        "font-family" : "Helvetica Neue",
-        "font-weight": "700"
-      }
-    })},
-    
-    {name: "h3",
-    function: () => setTextBlocks({
-      index: textBlocks.index + 1,
-      type: "h3",
-      defStyle: {
-        "font-size": "19px",
-        "font-family" : "Helvetica Neue",
-        "font-weight": "700"
-      }
-    })},
-    
-    {name: "h4",
-    function: () => setTextBlocks({
-      index: textBlocks.index + 1,
-      type: "h4",
-      defStyle: {
-        "font-size": "16px",
-        "font-family" : "Helvetica Neue",
-        "font-weight": "700"
-      }
-    })},
-    
-    {name: "h5",
-    function: () => setTextBlocks({
-      index: textBlocks.index + 1,
-      type: "h5",
-      defStyle: {
-        "font-size": "14px",
-        "font-family" : "Helvetica Neue",
-        "font-weight": "700"
-      }
-    })},
-    
-    {name: "h6",
-    function: () => setTextBlocks({
-      index: textBlocks.index + 1,
-      type: "h6",
-      defStyle: {
-        "font-size": "12px",
-        "font-family" : "Helvetica Neue",
-        "font-weight": "700"
-      }
-    })},
-    
-    {name: "p",
-    function: () => setTextBlocks({
-      index: textBlocks.index + 1,
-      type: "p"})},
-  ];
-  // end of buttonsComponents //
+  const componentsButtons = useFillButtonData(dispatchElements);
+  
 
   const otherButtons = [
     {name: "add class", function: setDisplay},
@@ -149,22 +50,21 @@ const ButtonPanel = ({
       {/* left button panel */}
       <div className={classes.button__div}>
 
-        {chosenClass === "delete element"
-          ?
-          <MyButton
-            onClick={() => setChosenClass("")} className={classes.chosen__btn}
-          >
-            delete element
-          </MyButton>
-          : 
-          <MyButton
-            onClick={() => setChosenClass("delete element")}
-          >
-            delete element
-          </MyButton>
-        }
+        {/* delete element button */}
 
-        {buttonsComponents.map(btn =>
+          <MyButton
+            {...(chosenClassOrAction === "delete element"
+              ? {className: classes.chosen__btn,
+                onClick: () => setChosenClassOrAction("")}
+
+              : {onClick: () => setChosenClassOrAction("delete element")})
+            }
+          >
+            delete element
+          </MyButton>
+
+        {/* components buttons */}
+        {componentsButtons.map(btn =>
 
           <MyButton 
             key={btn.name}
@@ -192,6 +92,6 @@ const ButtonPanel = ({
 
     </div>
   );
-};
+});
 
 export default ButtonPanel;

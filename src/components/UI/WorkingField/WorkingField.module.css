@@ -2,21 +2,55 @@
   width: 100%;
 }
 
+.draggable__h1,
+.draggable__h2,
+.draggable__h3,
+.draggable__h4,
+.draggable__h5,
+.draggable__h6 {
+  font-family : "Helvetica Neue";
+  font-weight: 700;
+}
+
+.draggable__h1 {
+  font-size: 32px;
+}
+
+.draggable__h2 {
+  font-size: 24px;
+}
+
+.draggable__h3 {
+  font-size: 19px;
+}
+
+.draggable__h4 {
+  font-size: 16px;
+}
+
+.draggable__h5 {
+  font-size: 14px;
+}
+
+.draggable__h6 {
+  font-size: 12px;
+}
+
 .draggable__div {
 
   /* bloack-model */
-  width: 100px;
-  height: 100px;
+  width: var(--hundred-px-width);
+  height: var(--hundred-px-height);
 
   /* decorations */
   background-color: #0074D9;
 }
 
-.draggable__text {
+.draggable__p {
 
   /* bloack-model */
-  width: 100px;
-  height: 100px;
+  width: var(--hundred-px-width);
+  height: var(--hundred-px-height);
 
   /* decorations */
   background-color: transparent;
@@ -25,20 +59,20 @@
   resize: none;
 }
 
-.draggable__text::-webkit-scrollbar {
+.draggable__p::-webkit-scrollbar {
   display: none;
 }
 
-.draggable__inp {
-  width: 300px;
-  height: 30px;
+.draggable__input {
+  width: var(--three-hundred-px-width);
+  height: var(--thirty-px-height);
 }
 
-.draggable__btn {
+.draggable__button {
 
   /* bloack-model */
-  width: 70px;
-  height: 20px;
+  width: var(--seventy-px-width);
+  height: var(--twenty-px-height);
 
   /* typography */
   font-size: 15px;

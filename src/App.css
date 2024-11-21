@@ -6,3 +6,16 @@
   /* other */
   box-sizing: border-box;
 }
+
+:root {
+  --hundred-px-width: 100px;
+  --hundred-px-height: 100px;
+
+  /* draggable__inp */
+  --three-hundred-px-width: 300px;
+  --thirty-px-height: 30px;
+
+  /* draggable__btn */
+  --seventy-px-width: 70px;
+  --twenty-px-height: 20px;
+}

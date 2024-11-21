@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import MyInput from "../MyInput/MyInput";
-import classes from "./ClassInputs.module.css"
+import classes from "./ClassInputs.module.css";
 
-const ClassInputs = ({ inputs, handleInputChange }) => {
+const ClassInputs = memo(({ inputs, handleInputChange }) => {
   return (
     <div className={classes.form}>
 
@@ -10,7 +10,7 @@ const ClassInputs = ({ inputs, handleInputChange }) => {
      {inputs.map(inp =>
         <div key={inp.name} className={classes.input__block}>
 
-          <h3>{inp.name}</h3>
+          <p>{inp.name}</p>
           <MyInput
             value={inp.value}
             onChange={(e) => handleInputChange(e, inp.inpName)}
@@ -21,6 +21,6 @@ const ClassInputs = ({ inputs, handleInputChange }) => {
 
     </div>
   );
-};
+});
 
 export default ClassInputs;

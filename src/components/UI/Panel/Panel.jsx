@@ -7,29 +7,52 @@ import classes from "./Panel.module.css";
 import ButtonPanel from "../ButtonPanel/ButtonPanel";
 import ClassPanel from "../../ClassPanel";
 
+
 const Panel = ({
 
-  // to ButtonPanel //
-  divs, inputBlocks, buttonBlocks, textBlocks, // number of array elements
-  divArr, inputArr, buttonArr, textBlockArr, // arrays of elements
-  setDivs, setInputBlocks, setButtonBlocks, setTextBlocks, // change the number of array elements
-  // end to ButtonPanel //
+  elements, dispatchElements,
 
-  // to ClassPanel //
-  setClassArr, setDeletedClass,
+  setDeletedClass,
+  classArr, setClassArr, 
+  chosenClassOrAction, setChosenClassOrAction,
 
-  // to both //
-  setDisplayMethod, classArr, setChosenClass, chosenClass,
-
-  // to noone //
-  displayMethod,
+  displayMethod, setDisplayMethod,
 
 }) => {
+
   
   const [displayPanel, setDisplayPanel] = useState(true);
 
   const rootClasses = [classes.panel__block]; // changes display to none
   if (!displayPanel) rootClasses.push(classes.hiden__block);
+
+
+  const renderButtonPanel = () => (
+    <ButtonPanel
+      elements = {elements}
+      dispatchElements = {dispatchElements}
+
+      classArr = {classArr}
+      chosenClassOrAction = {chosenClassOrAction}
+      setChosenClassOrAction = {setChosenClassOrAction}
+
+      setDisplayMethod = {setDisplayMethod}
+    />
+  )
+
+  const renderClassPanel = () => (
+    <ClassPanel
+    setDisplayMethod = {setDisplayMethod}
+    setDeletedClass = {setDeletedClass}
+
+    classArr = {classArr}
+    setClassArr = {setClassArr}
+
+    chosenClassOrAction = {chosenClassOrAction}
+    setChosenClassOrAction = {setChosenClassOrAction}
+  />
+  )
+
 
   return (
     <div className={rootClasses.join(" ")}>
@@ -38,48 +61,9 @@ const Panel = ({
       ? 
         <div className={classes.panel}>
 
-          {displayMethod === "buttons" &&
-            <ButtonPanel
+          {displayMethod === "buttons" && renderButtonPanel()}
 
-              // number of array elements //
-              divs = {divs}
-              inputBlocks = {inputBlocks}
-              buttonBlocks = {buttonBlocks}
-              textBlocks = {textBlocks}
-
-              // arrays of elements //
-              divArr = {divArr}
-              inputArr = {inputArr}
-              buttonArr = {buttonArr}
-              textBlockArr = {textBlockArr}
-
-              // change the number of array elements //
-              setDivs = {setDivs}
-              setInputBlocks = {setInputBlocks}
-              setButtonBlocks = {setButtonBlocks}
-              setTextBlocks = {setTextBlocks}
-
-              // other //
-              setDisplayMethod = {setDisplayMethod}
-              classArr = {classArr}
-              setChosenClass = {setChosenClass}
-              chosenClass = {chosenClass}
-
-            />
-          }
-
-          {displayMethod === "class" &&
-            <ClassPanel
-              setDisplayMethod = {setDisplayMethod}
-              setDeletedClass = {setDeletedClass}
-
-              classArr = {classArr}
-              setClassArr = {setClassArr}
-
-              chosenClass = {chosenClass}
-              setChosenClass = {setChosenClass}
-            />
-          }
+          {displayMethod === "class" && renderClassPanel()}
 
         </div>
       : 
