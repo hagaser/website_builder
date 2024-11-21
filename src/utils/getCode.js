@@ -11,7 +11,7 @@ export const getCode = (elements, classArr) => {
 `<style> 
 * {
   margin: 0;
-}`;
+}\n`;
 
 const fpCode = // first part
 `<!DOCTYPE html>
@@ -53,24 +53,26 @@ const defStyles = {
 
         // get element default styles and delete that is changed by class
         let formatedStyles = "";
-        if (!el.class) {
-          formatedStyles = defStyles[el.type];
-        } else {
+        const defElStyles = defStyles[el.type];
 
-          const defElStyles = defStyles[el.type];
+        if (el.class) {
           const elementClass = {...classArr.find(item => item.className === el.class)};
-
           Object.keys(defElStyles).forEach(style => {
             // if there is no such style then get default
 
             if (!elementClass[style]) {
-              formatedStyles = formatedStyles +
+              formatedStyles +=
                   // "backgroundColor" => "background-color"
               `  ${style.replace(/([A-Z])/g, "-$1").toLowerCase()}: ${defElStyles[style]};\n`;
             } 
-
           })
-
+          
+        } else {
+          Object.keys(defElStyles).forEach(style => {
+              formatedStyles +=
+                  // "backgroundColor" => "background-color"
+              `  ${style.replace(/([A-Z])/g, "-$1").toLowerCase()}: ${defElStyles[style]};\n`;
+          })
         }
 
         // from string "translate(551px, 111px)" => 551, 111
